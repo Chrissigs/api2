@@ -14,42 +14,36 @@ app.use(express.json());
 const certsDir = path.join(__dirname, '../certs');
 
 // Clause 4.6: Heartbeat Response Endpoint
-// This endpoint proves the Bank still has access to the original cryptographic material
-// Clause 4.6: Heartbeat Response Endpoint
-// This endpoint proves the Bank still has access to the original cryptographic material
+// Validates continued access to cryptographic material as per Deed of Reliance.
 app.post('/v1/heartbeat-response', (req, res) => {
     console.log('[BANK NODE] Heartbeat request received...');
 
-    // Clause 4.6.1: Verify Bank still has access to certs/ folder
-    // This is the legal "proof of continued reliance" required by the Deed
+    // Clause 4.6.1: Verify Certificate Access
     try {
         fs.accessSync(certsDir, fs.constants.R_OK);
-        console.log('[BANK NODE] Certificate access verified. Bank maintains cryptographic control.');
+        console.log('[BANK NODE] Certificate access verified.');
     } catch (err) {
-        console.error('[BANK NODE] CRITICAL: Cannot access certs/ folder. Legal warranty broken!');
+        console.error('[BANK NODE] CRITICAL: Certificate access failure.');
         return res.status(500).json({
             status: 'ACCESS_DENIED',
             error: 'Certificate access failure'
         });
     }
 
-    // Simulate real-world network delay (0-2 seconds)
-    // In production, this would be actual processing time
+    // Simulate network latency
     const delay = Math.floor(Math.random() * 2000);
-    console.log(`[BANK NODE] Simulating network delay: ${delay}ms`);
 
     setTimeout(() => {
-        console.log('[BANK NODE] Responding with ACCESS_CONFIRMED');
         res.status(200).json({ status: 'ACCESS_CONFIRMED' });
     }, delay);
 });
 
-// NEW: Client Trigger Endpoint (Frontend calls this)
+// Client Trigger Endpoint
 app.post('/client-trigger', async (req, res) => {
     const { amount, investorName, sourceAccount } = req.body;
-    console.log(`[BANK NODE] Client Trigger: ${investorName} buying EPU for ${amount} KYD from ${sourceAccount}`);
+    console.log(`[BANK NODE] Processing trigger for: ${investorName}`);
 
-    // 2.1 Atomic Settlement: Verify Funds First
+    // 2.1 Atomic Settlement: Verify Funds
     const paymentGateway = require('../src/payment-gateway');
     const paymentResult = await paymentGateway.processPayment(sourceAccount || 'VALID-GENERIC', amount, 'KYD');
 
@@ -58,7 +52,7 @@ app.post('/client-trigger', async (req, res) => {
         return res.status(402).json({
             status: 'PAYMENT_FAILED',
             error: paymentResult.error,
-            message: 'Atomic Settlement failed. Token not issued.'
+            message: 'Settlement failed.'
         });
     }
 

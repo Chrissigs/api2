@@ -6,6 +6,6 @@
   "scripts": {
     "start": "node src/compliance/regulation_25_check.js"
   },
-  "author": "The Reliance Standards Body",
+  "author": "The Sovereign Bridge Protocol",
   "license": "PROPRIETARY"
 }

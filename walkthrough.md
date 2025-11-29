@@ -1,7 +1,7 @@
 # Cayman Verifiable Trust Protocol Upgrade - Walkthrough
 
 ## Overview
-This document demonstrates the upgrade of Project Antigravity to a W3C-compliant Digital Identity Network.
+This document demonstrates the upgrade of the Legacy Prototype to a W3C-compliant Digital Identity Network.
 
 ## 1. The Credential Engine (Module 1)
 We have replaced generic JWTs with W3C Verifiable Credentials (JSON-LD).
