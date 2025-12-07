@@ -1,5 +1,5 @@
 /**
- * ANTIGRAVITY CORE v2.0
+ * CAYMAN DIGITAL RELIANCE FRAMEWORK
  * Module: Polymorphic Compliance Kernel
  * 
  * Generic compliance engine that loads rules dynamically based on jurisdiction.
@@ -8,6 +8,7 @@
 const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
+const auditRoulette = require('./audit_roulette_engine');
 
 class ComplianceValidator {
 
@@ -86,23 +87,21 @@ class ComplianceValidator {
     /**
      * Verifiable Random Function (VRF) for Regulatory Audit Selection
      */
-    verifyAuditSelection(seed, ruleSetId = 'KY') {
+    /**
+     * Cryptographically Secure Regulatory Audit Selection
+     * Uses AuditRouletteEngine (CSPRNG)
+     */
+    verifyAuditSelection(ruleSetId = 'KY') {
         const rules = this.getRules(ruleSetId);
         const probability = rules.requirements.vrf_probability || 0.015;
 
-        // VRF Simulation
-        const vrfKey = 'GLOBAL_COMPLIANCE_VRF_SECRET'; // In prod, use HSM
-        const hmac = crypto.createHmac('sha256', vrfKey);
-        hmac.update(seed);
-        const proof = hmac.digest('hex');
-
-        // Deterministic Sampling
-        const value = parseInt(proof.substring(0, 8), 16);
-        const threshold = 0xFFFFFFFF * probability;
+        // Delegate to CSPRNG Engine
+        const selection = auditRoulette.selectForAudit(probability);
 
         return {
-            audit_required: value < threshold,
-            proof: proof
+            audit_required: selection.selected,
+            proof: selection.proof_id,
+            entropy: selection.entropy_hex // Logged for mathematical verification if needed
         };
     }
 }

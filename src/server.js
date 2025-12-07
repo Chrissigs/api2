@@ -1,5 +1,6 @@
 /**
- * Mock Server (The Hub) for Heartbeat Tests
+ * CAYMAN DIGITAL RELIANCE FRAMEWORK
+ * Component: Compliance Hub Node (Reference Implementation)
  */
 
 let bankStatus = 'ACTIVE';
