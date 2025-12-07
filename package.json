@@ -1,0 +1,11 @@
+{
+  "name": "cayman-reliance-standard",
+  "version": "2.0.0-ENTERPRISE",
+  "description": "Cayman Digital Reliance Framework - Multi-Tenant Standard",
+  "main": "src/compliance/compliance_validator.js",
+  "scripts": {
+    "start": "node src/compliance/compliance_validator.js --test"
+  },
+  "author": "The Sovereign Bridge Protocol",
+  "license": "PROPRIETARY"
+}

@@ -1,0 +1,37 @@
+{
+    "KY": {
+        "jurisdiction": "Cayman Islands",
+        "document_title": "Deed of Reliance",
+        "governing_law": "Cayman Islands Anti-Money Laundering Regulations (2025 Revision)",
+        "template_id": "KY_REL_2025_V1",
+        "clause_reference": "Regulation 25 (Eligible Introducer)"
+    },
+    "SG_VCC": {
+        "jurisdiction": "Singapore",
+        "document_title": "VCC AML Delegation Agreement",
+        "governing_law": "Variable Capital Companies Act 2018",
+        "template_id": "SG_MAS626_V1",
+        "clause_reference": "MAS Notice 626 Para 4.1"
+    },
+    "LUX": {
+        "jurisdiction": "Luxembourg",
+        "document_title": "RAIF AML Reliance Statement",
+        "governing_law": "Law of 12 November 2004",
+        "template_id": "LUX_RAIF_V1",
+        "clause_reference": "CSSF Regulation 12-02"
+    },
+    "CH": {
+        "jurisdiction": "Switzerland",
+        "document_title": "Digital Agency Agreement",
+        "governing_law": "Swiss Code of Obligations",
+        "template_id": "CH_CO32_V1",
+        "clause_reference": "Article 32 (Direct Representation)"
+    },
+    "WY": {
+        "jurisdiction": "Wyoming (USA)",
+        "document_title": "DAO Member Audit Attestation",
+        "governing_law": "Wyoming Decentralized Autonomous Organization Supplement",
+        "template_id": "WY_DAO_V1",
+        "clause_reference": "W.S. 17-31-101 et seq."
+    }
+}

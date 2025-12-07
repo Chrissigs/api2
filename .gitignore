@@ -1,0 +1,37 @@
+# Dependencies
+node_modules/
+
+# Environment variables
+.env
+
+# Data and Logs
+data/
+evidence_vault/
+logs/
+*.log
+*.jsonl
+
+# Certificates and Keys
+certs/
+*.pem
+*.key
+
+# ZK Circuits Artifacts (Large files)
+circuits/*.r1cs
+circuits/*.zkey
+circuits/*.ptau
+circuits/*.wasm
+!circuits/identity.circom
+
+# IDEs
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Frontend (if present)
+bank-frontend/node_modules/
+bank-frontend/dist/
+bank-frontend/build/

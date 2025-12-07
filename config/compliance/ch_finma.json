@@ -1,0 +1,21 @@
+{
+    "jurisdiction_id": "CH",
+    "name": "Swiss AMLO-FINMA (Form A Digital)",
+    "effective_date": "2025-01-01",
+    "requirements": {
+        "allowed_jurisdictions": [
+            "CH",
+            "EU",
+            "US",
+            "UK",
+            "LI",
+            "SG"
+        ],
+        "minimum_investment": 100000,
+        "required_status": [
+            "QUALIFIED_INVESTOR",
+            "CISA_ART_10"
+        ],
+        "vrf_probability": 0.005
+    }
+}

@@ -1,0 +1,19 @@
+{
+    "jurisdiction_id": "WY",
+    "name": "Wyoming DAO Supplement (LLC Act)",
+    "effective_date": "2025-01-01",
+    "requirements": {
+        "allowed_jurisdictions": [
+            "US",
+            "WY",
+            "DE",
+            "NV"
+        ],
+        "minimum_investment": 0,
+        "required_status": [
+            "DAO_MEMBER",
+            "ACCREDITED_INVESTOR"
+        ],
+        "vrf_probability": 0.05
+    }
+}

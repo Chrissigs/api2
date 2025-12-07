@@ -1,0 +1,21 @@
+{
+    "jurisdiction_id": "SG_VCC",
+    "name": "Singapore VCC Act (MAS Notice 626)",
+    "effective_date": "2025-01-01",
+    "requirements": {
+        "allowed_jurisdictions": [
+            "SG",
+            "US",
+            "UK",
+            "HK",
+            "AU",
+            "KY"
+        ],
+        "minimum_investment": 200000,
+        "required_status": [
+            "MAS_REGULATED_FI",
+            "ACCREDITED_INVESTOR"
+        ],
+        "vrf_probability": 0.02
+    }
+}

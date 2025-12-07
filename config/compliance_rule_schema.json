@@ -1,0 +1,51 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Compliance Rule Set",
+    "type": "object",
+    "properties": {
+        "jurisdiction_id": {
+            "type": "string",
+            "description": "ISO 3166-2 code or specific legal identifier (e.g., KY, SG_VCC)"
+        },
+        "name": {
+            "type": "string",
+            "description": "Human readable name of the regulation"
+        },
+        "effective_date": {
+            "type": "string",
+            "format": "date"
+        },
+        "requirements": {
+            "type": "object",
+            "properties": {
+                "allowed_jurisdictions": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "List of approved jurisdictions for this rule set"
+                },
+                "minimum_investment": {
+                    "type": "number",
+                    "description": "Minimum investment amount if applicable"
+                },
+                "required_status": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "List of required statuses (e.g., ACCREDITED_INVESTOR, QUALIFIED_PURCHASER)"
+                },
+                "vrf_probability": {
+                    "type": "number",
+                    "description": "Probability of audit selection (0.0 - 1.0)"
+                }
+            }
+        }
+    },
+    "required": [
+        "jurisdiction_id",
+        "name",
+        "requirements"
+    ]
+}

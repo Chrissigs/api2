@@ -1,0 +1,26 @@
+{
+    "jurisdiction_id": "KY",
+    "name": "Cayman AML Regulations (2025 Revision) - Schedule 3",
+    "effective_date": "2025-01-01",
+    "requirements": {
+        "allowed_jurisdictions": [
+            "KY",
+            "US",
+            "UK",
+            "CA",
+            "SG",
+            "HK",
+            "JP",
+            "AU",
+            "WY",
+            "DE",
+            "NV"
+        ],
+        "minimum_investment": 5000000,
+        "required_status": [
+            "QUALIFIED_PURCHASER",
+            "REGULATED_ENTITY"
+        ],
+        "vrf_probability": 0.015
+    }
+}

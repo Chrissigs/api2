@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System Initialization | Cayman Reliance Framework</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f7f6; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .container { background: white; padding: 50px; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); width: 550px; text-align: center; }
+        h1 { color: #2c3e50; margin-bottom: 10px; }
+        p { color: #7f8c8d; margin-bottom: 30px; }
+        .form-group { margin-bottom: 20px; text-align: left; }
+        label { display: block; margin-bottom: 8px; font-weight: 600; color: #34495e; }
+        select, input { width: 100%; padding: 12px; border: 1px solid #bdc3c7; border-radius: 6px; font-size: 16px; box-sizing: border-box; }
+        button { background-color: #3498db; color: white; border: none; padding: 14px; border-radius: 6px; cursor: pointer; font-size: 16px; width: 100%; font-weight: 600; transition: background 0.3s; }
+        button:hover { background-color: #2980b9; }
+        
+        /* Walkers Branding Override */
+        .walkers-theme { border-top: 6px solid #003366; }
+        .walkers-theme h1 { color: #003366; }
+        .walkers-theme button { background-color: #003366; }
+        .walkers-theme button:hover { background-color: #002244; }
+        .success-message { color: #27ae60; font-weight: bold; margin-top: 20px; display: none; }
+    </style>
+</head>
+<body>
+
+    <div class="container" id="mainContainer">
+        <h1>System Initialization</h1>
+        <p>Configure your node for the Cayman Digital Reliance Framework.</p>
+
+        <div class="form-group">
+            <label>Select Entity Role</label>
+            <select id="roleSelect">
+                <option value="CORP_ADMIN">Corporate Administrator</option>
+                <option value="FIN_INST">Financial Institution</option>
+                <option value="REGULATOR">Regulator (CIMA)</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Enterprise License Key</label>
+            <input type="text" id="licenseKey" placeholder="ENTER-LICENSE-KEY">
+        </div>
+
+        <button onclick="initializeSystem()">Initialize System</button>
+
+        <div id="successMsg" class="success-message">
+            System Initialized Successfully.
+        </div>
+    </div>
+
+    <script>
+        function initializeSystem() {
+            const key = document.getElementById('licenseKey').value;
+            const container = document.getElementById('mainContainer');
+            const title = document.querySelector('h1');
+            const successMsg = document.getElementById('successMsg');
+
+            if (key === 'WALKERS-ENT-2025') {
+                // REBRAND TO WALKERS
+                container.classList.add('walkers-theme');
+                title.innerText = "Walkers Professional Services";
+                successMsg.innerHTML = \
+                    ✔ Production Mode Unlocked<br>
+                    ✔ Tenant: Walkers Fiduciary<br>
+                    ✔ Role: Corporate Administrator (Tier 1)
+                \;
+            } else {
+                // GENERIC INITIALIZATION
+                successMsg.innerHTML = \
+                    ✔ Standard Mode Active<br>
+                    ✔ Tenant: Unconfigured<br>
+                    ✔ Role: \
+                \;
+            }
+
+            successMsg.style.display = 'block';
+        }
+    </script>
+</body>
+</html>
