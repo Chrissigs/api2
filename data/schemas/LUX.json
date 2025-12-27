@@ -1,0 +1,26 @@
+{
+    "description": "Luxembourg RAIF Requirements",
+    "required": [
+        "ConditionalAttributes"
+    ],
+    "properties": {
+        "ConditionalAttributes": {
+            "type": "object",
+            "required": [
+                "SourceOfWealth"
+            ],
+            "properties": {
+                "SourceOfWealth": {
+                    "type": "string",
+                    "enum": [
+                        "SALARY",
+                        "INHERITANCE",
+                        "INVESTMENT",
+                        "BUSINESS",
+                        "OTHER"
+                    ]
+                }
+            }
+        }
+    }
+}

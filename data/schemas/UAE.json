@@ -1,0 +1,24 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "UAE_Compliance_Schema",
+    "description": "Validation constraints for UAE / ADGM / DIFC",
+    "type": "object",
+    "required": [
+        "uae_pass_id"
+    ],
+    "properties": {
+        "uae_pass_id": {
+            "type": "string",
+            "required": true,
+            "description": "Unique identifier from UAE Pass authentication."
+        },
+        "vara_clearance": {
+            "type": "boolean",
+            "description": "Virtual Assets Regulatory Authority clearance if applicable."
+        },
+        "adgm_commercial_license": {
+            "type": "string",
+            "description": "License number for entities operating in ADGM."
+        }
+    }
+}

@@ -1,0 +1,339 @@
+  Header:
+    type: object
+    required:
+      - timestamp
+      - bank_id
+      - transaction_id
+      - fund_id
+    properties:
+      timestamp:
+        type: string
+        format: date-time
+        example: "2025-11-22T20:00:00Z"
+      bank_id:
+        type: string
+        example: "BANK-001"
+      transaction_id:
+        type: string
+        example: "TXN-123"
+      fund_id:
+        type: string
+        example: "FUND_DEMO_01"
+        description: "Target Fund ID for routing to specific Fund Administrator"
+        zk_proof:
+          type: object
+          description: "Zero-Knowledge Proof (Groth16) for Identity or Solvency Attestation"
+          properties:
+            proof_type:
+              type: string
+              enum: [IDENTITY, SOLVENCY]
+              default: IDENTITY
+              example: "SOLVENCY"
+            pi_a:
+              type: array
+              items: { type: string }
+            pi_b:
+              type: array
+              items: { type: array, items: { type: string } }
+            pi_c:
+              type: array
+              items: { type: string }
+            protocol:
+              type: string
+              example: "groth16"
+        public_signals:
+          type: array
+          items: { type: string }
+          description: "Public outputs of the ZK circuit (e.g. [1] for 'Valid Jurisdiction')"
+        Nm:
+          type: object
+          description: "ISO 20022 Name structure for SEPA compliance"
+          properties:
+            FrstNm:
+              type: string
+              example: "Johnathan"
+              description: "First Name"
+            Srnm:
+              type: string
+              example: "Doe"
+              description: "Surname"
+          x-iso-20022-mapping: "Nm"
+        PstlAdr:
+          type: object
+          description: "ISO 20022 Postal Address for SEPA compliance"
+          properties:
+            StrtNm:
+              type: string
+              example: "123 Main Street"
+              description: "Street Name"
+            TwnNm:
+              type: string
+              example: "George Town"
+              description: "Town Name"
+            Ctry:
+              type: string
+              example: "KY"
+              description: "Country (ISO 3166-1 alpha-2)"
+            PstCd:
+              type: string
+              example: "KY1-1234"
+              description: "Postal Code"
+          x-iso-20022-mapping: "PstlAdr"
+        date_of_birth:
+          type: string
+          format: date
+          example: "1980-01-01"
+          x-iso-20022-mapping: "BirthDt"
+        nationality:
+          type: string
+          example: "KY"
+          x-iso-20022-mapping: "CtryOfRes"
+        InitgPty:
+          type: object
+          description: "Initiating Party (ISO 20022)"
+          properties:
+            Nm:
+              type: string
+              example: "Bank Cayman Ltd"
+            Id:
+              type: object
+              properties:
+                OrgId:
+                  type: object
+                  properties:
+                    AnyBIC:
+                      type: string
+                      example: "BANKKY11"
+        tax_residency:
+          type: array
+          description: "CRS-compliant multi-jurisdiction tax residency vector"
+          items:
+            type: object
+            required:
+              - Ctry
+              - TaxId
+            properties:
+              Ctry:
+                type: string
+                pattern: "^[A-Z]{2}$"
+                example: "KY"
+                description: "Country code (ISO 3166-1 alpha-2)"
+              TaxId:
+                type: string
+                pattern: "^[A-Za-z0-9+/]+={0,2}$"
+                example: "SGVsbG8gV29ybGQgRW5jcnlwdGVk..."
+                description: "Tax Identification Number (RSA-4096-OAEP encrypted for FATCA/CRS reporting)"
+                x-encryption-algorithm: "RSA-4096-OAEP"
+              TIN_Type:
+                type: string
+                enum: [SSN, EIN, UTR, OTHER]
+                example: "EIN"
+                description: "Type of Tax ID (FATCA Requirement)"
+          example:
+            - Ctry: "KY"
+              TaxId: "dGluLWV4YW1wbGUtZW5jcnlwdGVk"
+            - Ctry: "US"
+              TaxId: "dGluLXVzLWV4YW1wbGUtZW5jcnlwdGVk"
+          x-iso-20022-mapping: "TaxRes"
+        ConditionalAttributes:
+          type: object
+          description: "Attributes required by specific legal frameworks (e.g. MAS 626, Swiss Form A)"
+          properties:
+            SourceOfWealth:
+              type: string
+              enum: [SALARY, INHERITANCE, INVESTMENT, BUSINESS, OTHER]
+              description: "Origin of funds (Required for LUX/CH)"
+            AccreditedInvestorStatus:
+              type: boolean
+              description: "Self-attestation of accredited status (Required for SG/US)"
+            FormA_BeneficialOwner:
+              type: string
+              description: "Full name of beneficial owner if different from contracting partner (Swiss Form A)"
+            DAO_Member_ID:
+              type: string
+              description: "On-chain identifier for DAO membership (WY)"
+            DE_Series_Name:
+              type: string
+              description: "Name of the Series for Delaware Series LLC (DE)"
+            DE_File_Number:
+              type: string
+              description: "Delaware Division of Corporations File Number (DE)"
+            Registered_Agent_DE:
+              type: string
+              description: "Name of the Registered Agent in Delaware (DE)"
+        JurisdictionMetadata:
+          type: object
+          description: "Regulatory metadata specific to the issuing or relying jurisdiction"
+          properties:
+            SG_MAS626:
+              type: object
+              description: "Singapore MAS Notice 626 Requirements"
+              properties:
+                singpass_verified_status:
+                  type: boolean
+                  description: "True if identity verified via Singpass MyInfo"
+                section_11_reliance_attestation:
+                  type: boolean
+                  description: "Confirmation of Section 11 reliance for CDD"
+            UAE_Compliance:
+              type: object
+              description: "ADGM / DIFC Regulatory Requirements"
+              properties:
+                uae_pass_integration_id:
+                  type: string
+                  description: "Unique ID from UAE Pass authentication"
+                relevant_third_party_cert:
+                  type: boolean
+                  description: "Certification as a Relevant Third Party for reliance"
+            CI_Registry:
+              type: object
+              description: "Jersey/Guernsey Financial Services Commission Requirements"
+              properties:
+                eligible_introducer_status:
+                  type: boolean
+                  description: "Status as an Eligible Introducer under JFSC/GFSC rules"
+                voi_certificate_ref:
+                  type: string
+                  description: "Reference to the Verification of Identity (VoI) certificate"
+
+    ComplianceWarranty:
+      type: object
+      required:
+        - kyc_status
+        - screening_status
+        - warranty_token
+      properties:
+        kyc_status:
+          type: string
+          enum: [VERIFIED, PENDING, REJECTED]
+          example: "VERIFIED"
+        screening_status:
+          type: string
+          example: "CLEAR"
+        warranty_token:
+          type: string
+          description: SHA-256 hash or similar token.
+          example: "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        contract_id:
+          type: string
+          description: "Reference to the active Deed of Reliance in the Legal Registry"
+          example: "DEED-2025-001"
+        packet_ref:
+          type: string
+          description: "URI of the encrypted packet in the Data Vault (S3 Glacier)"
+          example: "vault/BANK-001/550e8400-e29b-41d4-a716-446655440000.enc"
+
+  /v1/passport/issue:
+    post:
+      summary: "Issue Universal Passport Credential"
+      description: "Admin Endpoint. Uses KYC Data to mint a W3C Verifiable Credential."
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - netWorth
+                - legalName
+                - dateOfBirth
+                - nationality
+              properties:
+                netWorth:
+                  type: number
+                  description: "Net Worth in USD for accreditation proof"
+                legalName:
+                  type: string
+                dateOfBirth:
+                  type: string
+                  format: date
+                nationality:
+                  type: string
+                address:
+                  type: string
+      responses:
+        '201':
+          description: "Credential Issued"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  credential:
+                    type: object
+                    description: "W3C Verifiable Credential"
+                  zk_proof:
+                    type: string
+                    description: "Zero-Knowledge Proof of Accreditation (if applicable)"
+
+  /v1/passport/verify:
+    post:
+      summary: "Verify Sovereign Passport Credential"
+      description: "Checks Semantic Validity, Cryptographic Integrity (Signature), and Revocation Status."
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - credential
+              properties:
+                credential:
+                  type: object
+                  description: "The W3C Verifiable Credential object to verify"
+      responses:
+        '200':
+          description: "Verification Result"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  verified:
+                    type: boolean
+                  reason:
+                    type: string
+                  status:
+                    type: string
+                  jurisdiction:
+                    type: string
+
+  /v1/vault/upload:
+    post:
+      summary: "Upload Encrypted Packet to Data Vault"
+      description: "Pushes an encrypted identity packet to immutable storage. Write-only access."
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - encrypted_payload
+                - bank_signature
+                - tenant_id
+              properties:
+                encrypted_payload:
+                  type: string
+                  description: "AES-256-GCM encrypted identity data"
+                bank_signature:
+                  type: string
+                  description: "Digital signature of the payload"
+                tenant_id:
+                  type: string
+                  description: "Firm ID for storage partitioning (e.g. BANK-001)"
+                  example: "BANK-001"
+      responses:
+        '201':
+          description: "Packet Archived"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  packet_ref:
+                    type: string
+                    example: "vault/BANK-001/550e8400-e29b-41d4-a716-446655440000.enc"
+        '403':
+          description: "Forbidden"

@@ -1,0 +1,35 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "US_Accreditation_Schema",
+    "description": "Validation constraints for US Accredited Investors (Reg D / Rule 506c)",
+    "type": "object",
+    "required": [
+        "accredited_investor_status",
+        "tax_residency"
+    ],
+    "properties": {
+        "accredited_investor_status": {
+            "type": "boolean",
+            "required": true,
+            "description": "Must be true for US persons investing in unregistered securities."
+        },
+        "tax_residency": {
+            "type": "array",
+            "minItems": 1,
+            "required": [
+                "Ctry",
+                "TaxId"
+            ],
+            "description": "Must declare US Tax ID (SSN/EIN) if US person."
+        },
+        "fatca_status": {
+            "type": "string",
+            "enum": [
+                "COMPLIANT",
+                "RECALCITRANT",
+                "EXEMPT"
+            ],
+            "description": "FATCA compliance status."
+        }
+    }
+}

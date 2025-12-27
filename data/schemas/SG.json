@@ -1,0 +1,23 @@
+{
+    "description": "Singapore MAS Notice 626 Requirements",
+    "required": [
+        "SG_MAS626"
+    ],
+    "properties": {
+        "SG_MAS626": {
+            "type": "object",
+            "required": [
+                "singpass_verified_status",
+                "section_11_reliance_attestation"
+            ],
+            "properties": {
+                "singpass_verified_status": {
+                    "type": "boolean"
+                },
+                "section_11_reliance_attestation": {
+                    "type": "boolean"
+                }
+            }
+        }
+    }
+}

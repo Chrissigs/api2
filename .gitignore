@@ -1,0 +1,8 @@
+node_modules
+.env
+.DS_Store
+coverage
+.vscode
+*.log
+keystore.json
+global_compliance_ledger.json

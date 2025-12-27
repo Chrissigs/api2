@@ -1,0 +1,20 @@
+{
+  "name": "universal-reliance-kernel",
+  "version": "2.0.0-ENTERPRISE",
+  "description": "Universal Digital Reliance Framework - Multi-Tenant Standard",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js"
+  },
+  "author": "The Universal Bridge Protocol",
+  "license": "PROPRIETARY",
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.948.0",
+    "axios": "^1.7.9",
+    "body-parser": "^1.20.3",
+    "express": "^4.21.2",
+    "pg": "^8.16.3",
+    "redis": "^4.6.10",
+    "zod": "^3.25.76"
+  }
+}

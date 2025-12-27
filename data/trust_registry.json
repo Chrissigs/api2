@@ -1,0 +1,33 @@
+{
+    "SG": [
+        "did:web:compliance.universal-bridge.ky",
+        "did:web:compliance.universal-bridge.sg",
+        "did:web:compliance.universal-bridge.uk"
+    ],
+    "UAE": [
+        "did:web:compliance.universal-bridge.ky",
+        "did:web:compliance.universal-bridge.ae",
+        "did:web:compliance.universal-bridge.sg",
+        "did:web:compliance.universal-bridge.us",
+        "did:web:compliance.adgm.ae",
+        "did:web:compliance.difc.ae"
+    ],
+    "KY": [
+        "*"
+    ],
+    "CI": [
+        "did:web:compliance.universal-bridge.ky",
+        "did:web:compliance.universal-bridge.je",
+        "did:web:compliance.universal-bridge.gg"
+    ],
+    "US": [
+        "did:web:compliance.universal-bridge.ky",
+        "did:web:compliance.universal-bridge.us",
+        "did:web:compliance.universal-bridge.wy",
+        "did:web:compliance.coinbase.us"
+    ],
+    "LUX": [
+        "did:web:compliance.universal-bridge.lu",
+        "did:web:compliance.pwc.lu"
+    ]
+}
